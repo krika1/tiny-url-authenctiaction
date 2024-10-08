@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyUrl.AuthenticationService", "TinyUrl.AuthenticationService\TinyUrl.AuthenticationService.csproj", "{1FC72DBA-79AA-4989-886A-3ED16AB07187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyUrl.AuthenticationService.Bussiness", "TinyUrl.AuthenticationService.Bussiness\TinyUrl.AuthenticationService.Bussiness.csproj", "{7107C46F-0D1E-4596-8393-AD995C5DECF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyUrl.AuthenticationService.Data", "TinyUrl.AuthenticationService.Data\TinyUrl.AuthenticationService.Data.csproj", "{4FA22B19-EFC9-4956-B64E-D3469B2ACD79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyUrl.AuthenticationService.Infrastructure", "TinyUrl.AuthenticationService.Infrastructure\TinyUrl.AuthenticationService.Infrastructure.csproj", "{ED63BED2-1E5D-4BC6-B10D-EC4F909A63CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyUrl.AuthenticationService.UnitTests", "TinyUrl.AuthenticationService.UnitTests\TinyUrl.AuthenticationService.UnitTests.csproj", "{71B1A39E-F133-44AC-BE1E-61ACF6E367AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FC72DBA-79AA-4989-886A-3ED16AB07187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC72DBA-79AA-4989-886A-3ED16AB07187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC72DBA-79AA-4989-886A-3ED16AB07187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC72DBA-79AA-4989-886A-3ED16AB07187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7107C46F-0D1E-4596-8393-AD995C5DECF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7107C46F-0D1E-4596-8393-AD995C5DECF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7107C46F-0D1E-4596-8393-AD995C5DECF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7107C46F-0D1E-4596-8393-AD995C5DECF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA22B19-EFC9-4956-B64E-D3469B2ACD79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA22B19-EFC9-4956-B64E-D3469B2ACD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA22B19-EFC9-4956-B64E-D3469B2ACD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA22B19-EFC9-4956-B64E-D3469B2ACD79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED63BED2-1E5D-4BC6-B10D-EC4F909A63CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED63BED2-1E5D-4BC6-B10D-EC4F909A63CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED63BED2-1E5D-4BC6-B10D-EC4F909A63CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED63BED2-1E5D-4BC6-B10D-EC4F909A63CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B1A39E-F133-44AC-BE1E-61ACF6E367AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B1A39E-F133-44AC-BE1E-61ACF6E367AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B1A39E-F133-44AC-BE1E-61ACF6E367AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B1A39E-F133-44AC-BE1E-61ACF6E367AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {998914EE-9281-49CB-8878-444E4B77A9DD}
+	EndGlobalSection
+EndGlobal
