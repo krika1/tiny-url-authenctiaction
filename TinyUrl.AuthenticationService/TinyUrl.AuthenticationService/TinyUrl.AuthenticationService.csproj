@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\TinyUrl.AuthenticationService.Bussiness\TinyUrl.AuthenticationService.Bussiness.csproj" />
+    <ProjectReference Include="..\TinyUrl.AuthenticationService.Data\TinyUrl.AuthenticationService.Data.csproj" />
+    <ProjectReference Include="..\TinyUrl.AuthenticationService.Infrastructure\TinyUrl.AuthenticationService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
