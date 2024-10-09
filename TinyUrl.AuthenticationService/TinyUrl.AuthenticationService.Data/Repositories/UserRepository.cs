@@ -32,5 +32,12 @@ namespace TinyUrl.AuthenticationService.Data.Repositories
                 .Find(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _dbContext.Users
+              .Find(u => u.Id == id)
+              .FirstOrDefaultAsync();
+        }
     }
 }
