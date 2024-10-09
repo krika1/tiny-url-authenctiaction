@@ -1,4 +1,5 @@
 using MongoDB.Driver;
+using TinyUrl.AuthenticationService.Bussiness.Services;
 using TinyUrl.AuthenticationService.Data.Repositories;
 using TinyUrl.AuthenticationService.Infrastructure.Context;
 using TinyUrl.AuthenticationService.Infrastructure.Repositories;
@@ -30,6 +31,7 @@ namespace TinyUrl.AuthenticationService
             builder.Services.AddScoped<IAuthenticationService, Bussiness.Services.AuthenticationService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
