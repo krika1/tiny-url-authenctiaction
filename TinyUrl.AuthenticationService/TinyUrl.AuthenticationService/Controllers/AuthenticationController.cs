@@ -53,7 +53,7 @@ namespace TinyUrl.AuthenticationService.Controllers
 
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TokenContract>> LoginUserAsync([FromBody] LoginRequest request)
         {
