@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TinyUrl.AuthenticationService.Infrastructure.Common;
 using TinyUrl.AuthenticationService.Infrastructure.Contracts.Requests;
 using TinyUrl.AuthenticationService.Infrastructure.Contracts.Responses;
