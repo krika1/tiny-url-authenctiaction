@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using System.Text;
 using TinyUrl.AuthenticationService.Bussiness.Services;
 using TinyUrl.AuthenticationService.Data.Repositories;
 using TinyUrl.AuthenticationService.Infrastructure.Context;
@@ -40,6 +43,38 @@ namespace TinyUrl.AuthenticationService
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
 
+            builder.Services.AddLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.AddDebug();
+            });
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                            .AddJwtBearer(options =>
+                            {
+                                options.TokenValidationParameters = new TokenValidationParameters
+                                {
+                                    ValidateLifetime = true,
+                                    ValidateIssuerSigningKey = true,
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")),
+                                    ValidateIssuer = false,
+                                    ValidateAudience = false
+                                };
+
+                                options.Events = new JwtBearerEvents
+                                {
+                                    OnAuthenticationFailed = context =>
+                                    {
+                                        Console.WriteLine("Token failed validation: " + context.Exception.Message);
+                                        return Task.CompletedTask;
+                                    }
+                                };
+                            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -51,9 +86,9 @@ namespace TinyUrl.AuthenticationService
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
+        
             app.MapControllers();
 
             app.Run();

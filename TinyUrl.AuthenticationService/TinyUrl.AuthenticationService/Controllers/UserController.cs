@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TinyUrl.AuthenticationService.Infrastructure.Common;
 using TinyUrl.AuthenticationService.Infrastructure.Contracts.Responses;
 using TinyUrl.AuthenticationService.Infrastructure.Exceptions;
@@ -8,6 +9,7 @@ namespace TinyUrl.AuthenticationService.Controllers
 {
     [ApiController]
     [Route("api/v1/users")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -20,6 +22,7 @@ namespace TinyUrl.AuthenticationService.Controllers
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<UserContract>> GetUserByIdAsync([FromRoute] int userId)
