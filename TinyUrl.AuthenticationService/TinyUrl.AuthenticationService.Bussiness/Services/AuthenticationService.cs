@@ -31,11 +31,12 @@ namespace TinyUrl.AuthenticationService.Bussiness.Services
             }
 
             var token = GenerateJwtToken(user!);
+            var expiresInLocal = TimeZoneInfo.ConvertTimeFromUtc(token.ValidTo, TimeZoneInfo.Local);
 
             return new TokenContract
             {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresIn = token.ValidTo
+                ExpiresIn = expiresInLocal
             };
         }
 
