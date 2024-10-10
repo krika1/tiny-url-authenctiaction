@@ -19,7 +19,8 @@ namespace TinyUrl.AuthenticationService.Controllers
         }
 
         [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserRequest request)
@@ -28,7 +29,7 @@ namespace TinyUrl.AuthenticationService.Controllers
             {
                 await _authenticationService.RegisterUserAsync(request).ConfigureAwait(false);
 
-                return Created();
+                return Ok();
             }
             catch (ConflictException ex)
             {
