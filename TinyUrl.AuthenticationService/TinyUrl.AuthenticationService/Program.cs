@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
@@ -60,18 +59,9 @@ namespace TinyUrl.AuthenticationService
                                 {
                                     ValidateLifetime = true,
                                     ValidateIssuerSigningKey = true,
-                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")),
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:Key"]!)),
                                     ValidateIssuer = false,
                                     ValidateAudience = false
-                                };
-
-                                options.Events = new JwtBearerEvents
-                                {
-                                    OnAuthenticationFailed = context =>
-                                    {
-                                        Console.WriteLine("Token failed validation: " + context.Exception.Message);
-                                        return Task.CompletedTask;
-                                    }
                                 };
                             });
 
