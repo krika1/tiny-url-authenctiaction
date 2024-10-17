@@ -24,7 +24,7 @@ namespace TinyUrl.AuthenticationService.Infrastructure.Middlewares
 
                 if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
                 {
-                    throw new UnauthorizedException(ErrorMessages.LoginFailedErrorMessage);
+                    throw new UnauthorizedException(ErrorMessages.TokenExpiredErrorMessage);
                 }
             }
             catch (UnauthorizedException ex)
