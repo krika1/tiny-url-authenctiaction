@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TinyUrl.AuthenticationService.Infrastructure.Common;
 using TinyUrl.AuthenticationService.Infrastructure.Contracts.Requests;
 using TinyUrl.AuthenticationService.Infrastructure.Contracts.Responses;
@@ -13,10 +12,11 @@ namespace TinyUrl.AuthenticationService.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
-
-        public AuthenticationController(IAuthenticationService authenticationService)
+        private readonly ILogger<AuthenticationController> _logger;
+        public AuthenticationController(IAuthenticationService authenticationService, ILogger<AuthenticationController> logger)
         {
             _authenticationService = authenticationService;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -34,21 +34,15 @@ namespace TinyUrl.AuthenticationService.Controllers
             }
             catch (ConflictException ex)
             {
-                var error = new ErrorContract(StatusCodes.Status409Conflict, ex.Message, ErrorTitles.RegisterUserErrorTitle);
+                _logger.LogError(ex.Message);
 
-                return new ObjectResult(error)
-                {
-                    StatusCode = StatusCodes.Status409Conflict,
-                };
+                return ObjectResultCreator.To409ConflictResult(ex.Message, ErrorTitles.RegisterUserErrorTitle);
             }
             catch (Exception ex)
             {
-                var error = new ErrorContract(StatusCodes.Status500InternalServerError, ex.Message, ErrorTitles.RegisterUserErrorTitle);
+                _logger.LogError(ex.Message);
 
-                return new ObjectResult(error)
-                {
-                    StatusCode = StatusCodes.Status500InternalServerError,
-                };
+                return ObjectResultCreator.To500InternalServerErrorResult(ex.Message, ErrorTitles.RegisterUserErrorTitle);
             }
         }
 
@@ -66,21 +60,15 @@ namespace TinyUrl.AuthenticationService.Controllers
             }
             catch (UnauthorizedException ex)
             {
-                var error = new ErrorContract(StatusCodes.Status401Unauthorized, ex.Message, ErrorTitles.UnauthorizedErrorTitle);
+                _logger.LogError(ex.Message);
 
-                return new ObjectResult(error)
-                {
-                    StatusCode = StatusCodes.Status401Unauthorized,
-                };
+                return ObjectResultCreator.To401UnauthorizedResult(ex.Message, ErrorTitles.UnauthorizedErrorTitle);
             }
             catch (Exception ex)
             {
-                var error = new ErrorContract(StatusCodes.Status500InternalServerError, ex.Message, ErrorTitles.LoginFailedErrorTitle);
+                _logger.LogError(ex.Message);
 
-                return new ObjectResult(error)
-                {
-                    StatusCode = StatusCodes.Status500InternalServerError,
-                };
+                return ObjectResultCreator.To500InternalServerErrorResult(ex.Message, ErrorTitles.LoginFailedErrorTitle);
             }
         }
     }

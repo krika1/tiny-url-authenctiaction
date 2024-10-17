@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System.Xml.Serialization;
 using TinyUrl.AuthenticationService.Infrastructure.Context;
 using TinyUrl.AuthenticationService.Infrastructure.Entities;
 using TinyUrl.AuthenticationService.Infrastructure.Repositories;
@@ -38,6 +39,16 @@ namespace TinyUrl.AuthenticationService.Data.Repositories
             return await _dbContext.Users
               .Find(u => u.Id == id)
               .FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(e => e.Id, user.Id);
+
+            var update = Builders<User>.Update
+                .Set(e => e.Password, user.Password);
+
+            await _dbContext.Users.UpdateOneAsync(filter, update);
         }
     }
 }

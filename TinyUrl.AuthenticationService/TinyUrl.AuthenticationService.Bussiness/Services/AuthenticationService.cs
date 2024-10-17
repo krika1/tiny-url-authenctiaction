@@ -16,10 +16,12 @@ namespace TinyUrl.AuthenticationService.Bussiness.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserLimitRepository _userLimitRepository;
 
-        public AuthenticationService(IUserRepository userRepository)
+        public AuthenticationService(IUserRepository userRepository, IUserLimitRepository userLimitRepository)
         {
             _userRepository = userRepository;
+            _userLimitRepository=userLimitRepository;
         }
 
         public async Task<TokenContract> LoginAsync(LoginRequest request)
@@ -53,6 +55,7 @@ namespace TinyUrl.AuthenticationService.Bussiness.Services
             user.Password = hashedPassword;
 
             await _userRepository.CreateUserAsync(user).ConfigureAwait(false);
+            await _userLimitRepository.CrateRecordAsync(new UserLimit { UserId = user.Id, DailyCalls = 0 });
         }
 
         private bool IsPasswordCorrect(string passwordInput, string hashedPassword)
@@ -71,7 +74,7 @@ namespace TinyUrl.AuthenticationService.Bussiness.Services
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: creds);
 
             return token;
